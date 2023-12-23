@@ -52,10 +52,17 @@ git clone https://github.com/harshithsunku/GenericEmbeddableDoublyLinkedList.git
 4. **Iterate Over the List:**
 
     ```c
-    for (dll_t *iter = dll_next(&my_list); iter != &my_list; iter = dll_next(iter)) {
-        my_data_t *elem = ... // Retrieve the containing structure
-        // Process elem->data
-    }
+    printf("List contents:\n");
+    dll_t *iter;
+    dll_traverse(&list_head, iter) {
+        my_data_t *item = container_of(iter, my_data_t, link);
+        printf("Data: %d\n", item->data);
+    }   
+
+    my_data_t *temp;
+    dll_traverse_entry(temp, &list_head, link, my_data_t){
+        printf("Data: %d\n", temp->data);
+    }   
     ```
 
 5. **Remove Elements:**
