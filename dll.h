@@ -83,6 +83,10 @@ dll_t *dll_prev(const dll_t *node);
          &pos->member != (head); \
          pos = container_of(pos->member.next, type, member))
 
+#define DLL_TO_STRUCT(fn_name, structure_name, field_name)                        \
+    static inline structure_name * fn_name(dll_t *dllptr){                   \
+        return (structure_name *)((char *)(dllptr) - (char *)&(((structure_name *)0)->field_name)); \
+    }
 
 #endif // DLL_H
 
